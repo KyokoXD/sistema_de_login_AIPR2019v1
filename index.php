@@ -77,7 +77,7 @@
                     < div  class = " form-group " >
                         < input  type = " text "  name = " nomeCompleto "  id = " nomeCompleto "  class = " forma-controle "  espaço reservado = " Nome completo "  required  minlength = " 5 " >
                     </ div >
-        
+       
                     < div  class = " form-group " >
                         < input  type = " text "  nome = " nomeUsuário "  id = " nomeUsuário "  class = " forma-controle "  espaço reservado = " Nome do Usuário "  minlength = " 5 "  requerido >
                     </ div >
