@@ -179,7 +179,8 @@
                         data: $('#formSenha').serialize()+'&action=senha',
                         success: function(resposta){
                             $('#alerta').show();
-                            $('#resultado').html(resposta);
+                            $('#resultado').html();
+
                         }
                     });
                 }
