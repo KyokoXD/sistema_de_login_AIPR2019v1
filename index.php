@@ -1,3 +1,8 @@
+<?php
+    session($_SESSIO['nomeUsuario']))
+
+    header("location: profile.php");
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -17,6 +22,7 @@
         }
     </style>
 </head>
+
 <body class="bg-dark">
     <main class="container mt-4">
         <!-- Conteúdo Principal -->
@@ -134,115 +140,159 @@
     <script>
         /* jQuery */
         $(function() {
-            //Front-end
-            //Preparação dos dados para envio para o back-end
-            //Envio dos dados do formulário de login
-            $('#btnEntrar').click(function(e) {
-                let formLogin = document.querySelector("#formLogin");
-                if (formLogin.checkValidity()) {
-                    e.preventDefault(); //Não recarregar a página
-                    $.ajax({
-                        url: 'recebe.php',
-                        method: 'post',
-                        data: $('#formLogin').serialize() + '&action=login',
-                        success: function(resposta) {
-                            $('#alerta').show();
-                            $('#resultado').html("resposta:" + resposta);
+                    //Front-end
+                    //Preparação dos dados para envio para o back-end
+                    //Envio dos dados do formulário de login
+                    $('#btnEntrar').click(function(e) {
+                        let formLogin = document.querySelector("#formLogin");
+                        if (formLogin.checkValidity()) {
+                            e.preventDefault(); //Não recarregar a página
+                            $.ajax({
+                                url: 'recebe.php',
+                                method: 'post',
+                                data: $('#formLogin').serialize() + '&action=login',
+                                success: function(resposta) {
+                                    $('#alerta').show();
+                                    $('#resultado').html("resposta:" + resposta);
+                                }
+                            });
                         }
                     });
-                }
-            });
-            //Formulário de Cadastro de usuário
-            $('#btnRegistrar').click(function(e) {
-                let formCadastro = document.querySelector("#formCadastro");
-                if (formCadastro.checkValidity()) {
-                    e.preventDefault(); //Sem recarregar o formulário
-                    $.ajax({
-                        url: 'recebe.php',
-                        method: 'post',
-                        data: $('#formCadastro').serialize() + '&action=cadastro',
-                        success: function(resposta) {
-                            $('#alerta').show();
-                            $('#resultado').html(resposta);
+                    //Formulário de Cadastro de usuário
+                    $('#btnRegistrar').click(function(e) {
+                        let formCadastro = document.querySelector("#formCadastro");
+                        if (formCadastro.checkValidity()) {
+                            e.preventDefault(); //Sem recarregar o formulário
+                            $.ajax({
+                                url: 'recebe.php',
+                                method: 'post',
+                                data: $('#formCadastro').serialize() + '&action=cadastro',
+                                success: function(resposta) {
+                                    $('#alerta').show();
+                                    $('#resultado').html(resposta);
+                                }
+                            });
                         }
                     });
-                }
-            });
-            //Formulário para mudar de senha
-            $('#btnEnviarEmail').click(function(e) {
-                let formSenha = document.querySelector('#formSenha');
-                if(formSenha.checkValidity()){
-                    e.preventDefault();//Não recarregar a página
-                    $.ajax({
-                        url: 'recebe.php',
-                        method: 'post',
-                        data: $('#formSenha').serialize()+'&action=senha',
-                        success: function(resposta){
-                            $('#alerta').show();
-                            $('#resultado').html();
+                    //Formulário para mudar de senha
+                    $('#btnEnviarEmail').click(function(e) {
+                                let formSenha = document.querySelector('#formSenha');
+                                if (formSenha.checkValidity()) {
+                                    e.preventDefault(); //Não recarregar a página
+                                    $.ajax({
+                                                url: 'recebe.php',
+                                                method: 'post',
+                                                data: $('#formSenha').serialize() + '&action=senha',
+                                                success: function(resposta) {
+                                                        $('#alerta').show();
+                                                        $('#resultado').html(resposta);
+                                                        if (resposta = "ok") {
+                                                            window.location = "<!doctype html> <
+                                                                html lang = "en" >
+                                                                <
+                                                                head >
+                                                                <
+                                                                !--Required meta tags-- >
+                                                                <
+                                                                meta charset = "utf-8" >
+                                                                <
+                                                                meta name = "viewport"
+                                                            content = "width=device-width, initial-scale=1, shrink-to-fit=no" >
 
-                        }
-                    });
-                }
-            });
-            //Trocar da Tela de Login para Recuperar Senha
-            $("#btnEsqueci").click(function() {
-                $("#caixaLogin").hide();
-                $("#caixaRecuperarSenha").show();
-            });
-            //Voltar para a tela de Login
-            $("#btnVoltar").click(function() {
-                $("#caixaLogin").show();
-                $("#caixaRecuperarSenha").hide();
-            });
-            //Trocar de tela de Login para cadastro de usuário
-            $('#btnCadastrar').click(function() {
-                $("#caixaLogin").hide();
-                $("#caixaCadastro").show();
-            });
-            //Voltar para a tela de Login
-            $('#btnJáCadastrado').click(function() {
-                $("#caixaLogin").show(); //mostrar
-                $("#caixaCadastro").hide(); //ocultar
-            });
-            //jQuery Validation chão chão
-            $("#formLogin").validate();
-            $("#formSenha").validate();
-            $.validator.setDefaults({
-                success: "valid"
-            });
-            $("#formCadastro").validate({
-                rules: {
-                    senhaConfirma: {
-                        equalTo: "#senhaUsuário"
-                    }
-                }
-            });
-        });
-        /*
-         * Translated default messages for the jQuery validation plugin.
-         * Locale: PT_BR
-         * https://gist.github.com/diegoprates/5047663
-         */
-        jQuery.extend(jQuery.validator.messages, {
-            required: "Este campo &eacute; requerido.",
-            remote: "Por favor, corrija este campo.",
-            email: "Por favor, forne&ccedil;a um endere&ccedil;o eletr&ocirc;nico v&aacute;lido.",
-            url: "Por favor, forne&ccedil;a uma URL v&aacute;lida.",
-            date: "Por favor, forne&ccedil;a uma data v&aacute;lida.",
-            dateISO: "Por favor, forne&ccedil;a uma data v&aacute;lida (ISO).",
-            number: "Por favor, forne&ccedil;a um n&uacute;mero v&aacute;lido.",
-            digits: "Por favor, forne&ccedil;a somente d&iacute;gitos.",
-            creditcard: "Por favor, forne&ccedil;a um cart&atilde;o de cr&eacute;dito v&aacute;lido.",
-            equalTo: "Por favor, forne&ccedil;a o mesmo valor novamente.",
-            accept: "Por favor, forne&ccedil;a um valor com uma extens&atilde;o v&aacute;lida.",
-            maxlength: jQuery.validator.format("Por favor, forne&ccedil;a n&atilde;o mais que {0} caracteres."),
-            minlength: jQuery.validator.format("Por favor, forne&ccedil;a ao menos {0} caracteres."),
-            rangelength: jQuery.validator.format("Por favor, forne&ccedil;a um valor entre {0} e {1} caracteres de comprimento."),
-            range: jQuery.validator.format("Por favor, forne&ccedil;a um valor entre {0} e {1}."),
-            max: jQuery.validator.format("Por favor, forne&ccedil;a um valor menor ou igual a {0}."),
-            min: jQuery.validator.format("Por favor, forne&ccedil;a um valor maior ou igual a {0}.")
-        });
+                                                                <
+                                                                !--Bootstrap CSS-- >
+                                                                <
+                                                                link rel = "stylesheet"
+                                                            href = "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+                                                            integrity = "sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+                                                            crossorigin = "anonymous" >
+
+                                                                <
+                                                                title > Hello, world! < /title> <
+                                                                /head> <
+                                                                body >
+                                                                <
+                                                                h1 > Hello, world! < /h1>
+
+                                                                <
+                                                                !--Optional JavaScript-- >
+                                                                <
+                                                                !--jQuery first, then Popper.js, then Bootstrap JS-- >
+                                                                <
+                                                                script src = "https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                                                            integrity = "sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                                                            crossorigin = "anonymous" >
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
+
+</html>profile.php";
+}
+
+}
+});
+}
+});
+//Trocar da Tela de Login para Recuperar Senha
+$("#btnEsqueci").click(function() {
+$("#caixaLogin").hide();
+$("#caixaRecuperarSenha").show();
+});
+//Voltar para a tela de Login
+$("#btnVoltar").click(function() {
+$("#caixaLogin").show();
+$("#caixaRecuperarSenha").hide();
+});
+//Trocar de tela de Login para cadastro de usuário
+$('#btnCadastrar').click(function() {
+$("#caixaLogin").hide();
+$("#caixaCadastro").show();
+});
+//Voltar para a tela de Login
+$('#btnJáCadastrado').click(function() {
+$("#caixaLogin").show(); //mostrar
+$("#caixaCadastro").hide(); //ocultar
+});
+//jQuery Validation chão chão
+$("#formLogin").validate();
+$("#formSenha").validate();
+$.validator.setDefaults({
+success: "valid"
+});
+$("#formCadastro").validate({
+rules: {
+senhaConfirma: {
+equalTo: "#senhaUsuário"
+}
+}
+});
+});
+/*
+* Translated default messages for the jQuery validation plugin.
+* Locale: PT_BR
+* https://gist.github.com/diegoprates/5047663
+*/
+jQuery.extend(jQuery.validator.messages, {
+required: "Este campo &eacute; requerido.",
+remote: "Por favor, corrija este campo.",
+email: "Por favor, forne&ccedil;a um endere&ccedil;o eletr&ocirc;nico v&aacute;lido.",
+url: "Por favor, forne&ccedil;a uma URL v&aacute;lida.",
+date: "Por favor, forne&ccedil;a uma data v&aacute;lida.",
+dateISO: "Por favor, forne&ccedil;a uma data v&aacute;lida (ISO).",
+number: "Por favor, forne&ccedil;a um n&uacute;mero v&aacute;lido.",
+digits: "Por favor, forne&ccedil;a somente d&iacute;gitos.",
+creditcard: "Por favor, forne&ccedil;a um cart&atilde;o de cr&eacute;dito v&aacute;lido.",
+equalTo: "Por favor, forne&ccedil;a o mesmo valor novamente.",
+accept: "Por favor, forne&ccedil;a um valor com uma extens&atilde;o v&aacute;lida.",
+maxlength: jQuery.validator.format("Por favor, forne&ccedil;a n&atilde;o mais que {0} caracteres."),
+minlength: jQuery.validator.format("Por favor, forne&ccedil;a ao menos {0} caracteres."),
+rangelength: jQuery.validator.format("Por favor, forne&ccedil;a um valor entre {0} e {1} caracteres de comprimento."),
+range: jQuery.validator.format("Por favor, forne&ccedil;a um valor entre {0} e {1}."),
+max: jQuery.validator.format("Por favor, forne&ccedil;a um valor menor ou igual a {0}."),
+min: jQuery.validator.format("Por favor, forne&ccedil;a um valor maior ou igual a {0}.")
+});
+</script>
+</body>
+
 </html>
