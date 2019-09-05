@@ -17,7 +17,6 @@
         }
     </style>
 </head>
-
 <body class="bg-dark">
     <main class="container mt-4">
         <!-- Conteúdo Principal -->
@@ -172,13 +171,13 @@
             //Formulário para mudar de senha
             $('#btnEnviarEmail').click(function(e) {
                 let formSenha = document.querySelector('#formSenha');
-                if (formSenha.checkValidity()) {
-                    e.preventDefault(); //Não recarregar a página
+                if(formSenha.checkValidity()){
+                    e.preventDefault();//Não recarregar a página
                     $.ajax({
                         url: 'recebe.php',
                         method: 'post',
-                        data: $('#formSenha').serialize() + '&action=senha',
-                        success: function(resposta) {
+                        data: $('#formSenha').serialize()+'&action=senha',
+                        success: function(resposta){
                             $('#alerta').show();
                             $('#resultado').html(resposta);
                         }
@@ -245,5 +244,4 @@
         });
     </script>
 </body>
-
 </html>
