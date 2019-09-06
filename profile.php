@@ -8,6 +8,7 @@ require_once 'session.php';
 
 <head>
     <!-- Required meta tags -->
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -50,6 +51,7 @@ require_once 'session.php';
     </nav>
 
     <main class="container mt-4">
+        <img src="<?= $urlAvatar ?>" alt="Foto de <?= $usuario ?>" />
         <h1 class="text-light">Perfil de usuário</h1>
         <h2 class="text-light">Nome: <?= $nome ?></h2>
         <h2 class="text-light">E-mail: <?= $email ?></h2>
