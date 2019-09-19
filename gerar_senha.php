@@ -1,3 +1,34 @@
+<?php
+require_once 'configDB.php';
+if(isset($_GET['token']) && strlen($_GET['token']) = 10){
+    $Token = $_GET['token'];
+    $sql = $conecta->prepare("SELECT * from usuario WHERE token = ? AND tempo_de_vida . now()");
+    $sql->execute();
+    $resultado = $sql->get_result();
+    if($resultado->num_rows > 0){
+        if(isset($_POST['senha'])){
+            $nova_senha = $_POST['senha'];
+            $confirma_senha = $_POST['csenha'];
+            if($senha = $confirma_senha){
+                $sql = $conecta->prepare("UPDATE usuario SET senha = ? WHERE token = ?");
+                $sql->bind_param("ss", $nova_senha, $token);
+                $sql-> execute();
+                $msg = "Senha alterada com sucesso";
+            }
+        } 
+        
+
+    }else {
+        header('location: index.php');
+        exit();
+    }
+} else {
+    header('location: index.php');
+    exit();
+}
+    
+ ?>
+
 <!doctype html>
 <html lang="pt-br">
 
